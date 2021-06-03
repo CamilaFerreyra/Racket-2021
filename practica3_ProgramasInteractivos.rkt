@@ -12,7 +12,7 @@
 ;---------
 
 ;definiciones de escena
-(define ANCHO 500)  ;ancho nde la escena
+(define ANCHO 250)  ;ancho nde la escena
 (define ALTO 250)   ;alto de la escena
 (define ESCENA (empty-scene ANCHO ALTO))  ;escena
 
@@ -55,11 +55,57 @@
 ;------------------------------------------------
 (define ESTADO_INICIAL "red")  ;estado inicial del programa
 
+#|
 (big-bang ESTADO_INICIAL
      [on-draw interpretar]
      [on-key manejarTeclado]
      )
+|#
 
 ;***********
 ;   EJ 2
 ;***********
+#|Escriba un programa que dibuje un círculo color azul
+de radio 100 el cual vaya disminuyendo su tamaño
+con el paso del tiempo (es decir, con cada tick del reloj).|#
+
+;el estado del programa será el radio del circulo
+;el estado es un numero
+;---------
+;Estado es Number
+;---------
+
+;------------------------------------------------
+;dibujarCirculo2 Number String -> Image
+;recibe radio y color de un circulo
+;delvuelve un circulo de ese radio y color
+(define (dibujarCirculo2 radio color)
+  (circle radio "solid" color))
+
+;------------------------------------------------
+;interpretar2 Estado -> Image
+;recibe el radio de un circulo y
+;devuelve un circulo azul con ese radio
+;en el medio de una escena
+(define (interpretar2 estado)
+  (place-image (dibujarCirculo2 estado "blue")
+               (* ANCHO 1/2) (* ALTO 1/2)
+               ESCENA))
+
+;------------------------------------------------
+;disminuir Estado -> Estado
+;recibe un radio del circulo
+;devuelve un radio menor
+;si el radio es 0, devuelve el radio incial
+;por ende, su minimo radio es 0
+(define (disminuir estado)
+  (if (= estado 0)
+      ESTADO_INICIAL2 (- estado 1)))
+
+;------------------------------------------------
+
+(define ESTADO_INICIAL2 100)    ;radio inicial
+
+(big-bang ESTADO_INICIAL2
+  [on-draw interpretar2]
+  [on-tick disminuir])
