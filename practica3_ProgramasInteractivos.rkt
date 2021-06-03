@@ -104,14 +104,14 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 
 ;------------------------------------------------
 
-;manejadorMouse Estado Number Number String -> Estado
+;manejarMouse Estado Number Number String -> Estado
 ;recibe el radio del circulo,
 ;las posiciones x e y del mouse
 ;y que clase de evento que se produjo
 ; cuando se preciona el click dentro de la escena,
 ; el radio del circulo toma el valor de la coordenada y
 ; de la posicion donde se hizo click
-(define (manejadorMouse radio x y evento)
+(define (manejarMouse radio x y evento)
          (cond [(string=? evento "button-down") y]
                [else radio]
                )
@@ -120,8 +120,62 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 
 
 (define ESTADO_INICIAL2 100)    ;radio inicial
-
+#|
 (big-bang ESTADO_INICIAL2
   [on-draw interpretar2]
   [on-tick disminuir]
-  [on-mouse manejadorMouse])
+  [on-mouse manejarMouse])
+|#
+
+;***********
+;   EJ 4
+;***********
+;mover un objeto verticalmente
+;el estado representa la posicion en y del objeto
+;----------
+;Estado es Number
+;----------
+(define ALTO_OBJ 20) ;medida vertical del objeto
+(define OBJETO (square ALTO_OBJ "solid" "pink")) ;figura que se movera
+(define DELTA 10) ;cantidad de pixeles que se desplazara en cada movimiento
+;------------------------------------------------
+
+;interpretar4 Estado -> Image
+;toma la posicion en y de una objeto y
+;devuelve el objeto centrado horizontalmente
+;en una escena.
+(define (interpretar4 y)
+  (place-image OBJETO
+               (* 1/2 ANCHO) y
+               ESCENA))
+;------------------------------------------------
+
+;manejarTeclado4 Estado String -> Image
+;recibe una posicion en y del objeto
+;y una tecla. Mueve el objeto en vertical
+; flecha hacia arriba: sube DELTA unidades
+; flecha hacia abajo: baja DELTA unidades
+(define (manejarTeclado4 y tecla)
+  (cond [(key=? "up" tecla)
+         (- y DELTA)]
+        [(key=? "down" tecla)
+         (+ y DELTA)]
+        [else y]))
+;------------------------------------------------
+
+;manejarMouse4 Estado Number Number String -> Estado
+(define (manejarMouse4 y_objeto x_mouse y_mouse evento)
+  (cond [(string=? evento "button-down") y_mouse]
+        [else y_objeto]))
+;------------------------------------------------
+
+(define ESTADO_INICIAL4 (* ALTO 1/2)) ;posicion inicial en y
+
+(big-bang ESTADO_INICIAL4
+  [on-draw interpretar4]
+  [on-key manejarTeclado4]
+  [on-mouse manejarMouse4]
+  )
+
+
+
