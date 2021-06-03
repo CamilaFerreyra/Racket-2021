@@ -104,8 +104,24 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 
 ;------------------------------------------------
 
+;manejadorMouse Estado Number Number String -> Estado
+;recibe el radio del circulo,
+;las posiciones x e y del mouse
+;y que clase de evento que se produjo
+; cuando se preciona el click dentro de la escena,
+; el radio del circulo toma el valor de la coordenada y
+; de la posicion donde se hizo click
+(define (manejadorMouse radio x y evento)
+         (cond [(string=? evento "button-down") y]
+               [else radio]
+               )
+         )
+;------------------------------------------------
+
+
 (define ESTADO_INICIAL2 100)    ;radio inicial
 
 (big-bang ESTADO_INICIAL2
   [on-draw interpretar2]
-  [on-tick disminuir])
+  [on-tick disminuir]
+  [on-mouse manejadorMouse])
