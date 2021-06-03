@@ -149,6 +149,14 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
                (* 1/2 ANCHO) y
                ESCENA))
 ;------------------------------------------------
+;verificar Number -> Boolean
+;determina si la futura posicion
+;en y del objeto será válida
+;si es valida, devuelve true, sino false.
+(define (verificar posible_posicion)
+  (and (> posible_posicion (* 1/2 ALTO_OBJ))
+       (< posible_posicion (- ALTO (* 1/2 ALTO_OBJ)))))
+;------------------------------------------------
 
 ;manejarTeclado4 Estado String -> Image
 ;recibe una posicion en y del objeto
@@ -157,9 +165,9 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 ; flecha hacia abajo: baja DELTA unidades
 (define (manejarTeclado4 y tecla)
   (cond [(key=? "up" tecla)
-         (- y DELTA)]
+         (if (verificar (- y DELTA)) (- y DELTA) y)]
         [(key=? "down" tecla)
-         (+ y DELTA)]
+         (if (verificar(+ y DELTA)) (+ y DELTA) y)]
         [else y]))
 ;------------------------------------------------
 
