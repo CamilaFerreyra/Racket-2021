@@ -135,7 +135,7 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 ;----------
 ;Estado es Number
 ;----------
-(define ALTO_OBJ 20) ;medida vertical del objeto
+(define ALTO_OBJ 80) ;medida vertical del objeto
 (define OBJETO (square ALTO_OBJ "solid" "pink")) ;figura que se movera
 (define DELTA 10) ;cantidad de pixeles que se desplazara en cada movimiento
 ;------------------------------------------------
