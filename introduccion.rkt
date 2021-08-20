@@ -12,7 +12,7 @@
 #|En lenguaje racket, las imagenes son un
  tipo de dato|#
 (circle 2 "solid" "red")
-(rectangle 20 30 "outline" "blue")
+(image-height (rectangle 20 30 "outline" "blue"))
 (overlay (rectangle 30 60 "solid" "orange")
          (ellipse 60 30 "solid" "yellow")
          (ellipse 60 30 "outline" "black"))
@@ -20,3 +20,7 @@
 (place-image(rectangle 30 60 "solid" "orange")
             0 0
             (ellipse 160 130 "solid" "yellow"))
+(place-image(rectangle 30 60 "solid" "orange")
+            100 50
+            (circle 50 "solid" "red"))
+(modulo 4 2)

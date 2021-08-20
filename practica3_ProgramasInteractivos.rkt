@@ -141,7 +141,7 @@ con el paso del tiempo (es decir, con cada tick del reloj).|#
 ;------------------------------------------------
 
 ;interpretar4 Estado -> Image
-;toma la posicion en y de una objeto y
+;toma la posicion en y de un objeto y
 ;devuelve el objeto centrado horizontalmente
 ;en una escena.
 (define (interpretar4 y)
